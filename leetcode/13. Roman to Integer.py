@@ -36,77 +36,10 @@ def romanToInt(self, s: str) -> int:
     Rom = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     s_len = len(s)
     s_sum = 0
-    i = 0
 
-    while i < s_len:
-        if s[i] == 'I':
-            if s[i + 1] == 'V':
-                s_sum += 4
-                i += 2
-            elif s[i + 1] == 'X':
-                s_sum += 9
-                i += 2
-            elif s[i + 1] == 'I':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'L':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'C':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'D':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'M':
-                s_sum += Rom[s[i]]
-                i += 1
-        elif s[i] == 'X':
-            if s[i + 1] == 'L':
-                s_sum += 40
-                i += 2
-            elif s[i + 1] == 'C':
-                s_sum += 90
-                i += 2
-            elif s[i + 1] == 'I':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'V':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'X':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'C':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'M':
-                s_sum += Rom[s[i]]
-                i += 1
-        elif s[i] == 'C':
-            if s[i + 1] == 'D':
-                s_sum += 400
-                i += 2
-            elif s[i + 1] == 'M':
-                s_sum += 900
-                i += 2
-            elif s[i + 1] == 'I':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'V':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'X':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'L':
-                s_sum += Rom[s[i]]
-                i += 1
-            elif s[i + 1] == 'C':
-                s_sum += Rom[s[i]]
-                i += 1
+    for i in range(0, s_len):
+        if Rom[s[i - 1]] < Rom[s[i]]:
+            s_sum += (Rom[s[i]] - (Rom[s[i - 1]] * 2))
         else:
             s_sum += Rom[s[i]]
-            i += 1
-
-    print(s_sum)
+    return s_sum
