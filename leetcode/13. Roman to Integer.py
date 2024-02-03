@@ -36,10 +36,18 @@ def romanToInt(self, s: str) -> int:
     Rom = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     s_len = len(s)
     s_sum = 0
+    i = 0
 
-    for i in range(0, s_len):
-        if Rom[s[i - 1]] < Rom[s[i]]:
-            s_sum += (Rom[s[i]] - (Rom[s[i - 1]] * 2))
+
+    while i < (s_len - 1):
+        if Rom[s[i]] < Rom[s[i + 1]]:
+            s_sum += (Rom[s[i + 1]] - Rom[s[i]])
+            i += 2
         else:
-            s_sum += Rom[s[i]]
+            if i == (s_len - 2):
+                s_sum += (Rom[s[i]] + Rom[s[i + 1]])
+                i += 1
+            else:
+                s_sum += Rom[s[i]]
+                i += 1
     return s_sum
